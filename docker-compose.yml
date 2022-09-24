@@ -15,4 +15,4 @@ services:
       - WATCHPACK_POLLING=true
     volumes:
       - ./:/home/node/app
-    command: "npm install"
+    command: sh -c "npm install && npm start"
