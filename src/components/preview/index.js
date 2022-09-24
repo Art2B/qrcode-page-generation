@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import {Section} from './../layout';
 import renderPreview, {clearCanvas} from './canvas';
@@ -50,6 +51,7 @@ export default function Preview({
   nbLines,
 }) {
   const canvasRef = React.useRef(null);
+  const { t } = useTranslation();
 
   React.useEffect(debounce(() => {
     if (canvasRef?.current) {
@@ -73,9 +75,9 @@ export default function Preview({
 
   return (
     <Section>
-      <h2>Prévisualisation</h2>
+      <h2>{t('preview')}</h2>
       { img &&
-        <button type="button" onClick={saveAsJPG}>Télécharger</button>
+        <button type="button" onClick={saveAsJPG}>{t('downloadCta')}</button>
       }
       <Canvas ref={canvasRef} />
     </Section>
