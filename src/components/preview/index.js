@@ -75,7 +75,7 @@ export default function Preview({
     <Section>
       <h2>Prévisualisation</h2>
       { img &&
-        <button type="button" onClick={saveAsJPG} disabled={img}>Télécharger</button>
+        <button type="button" onClick={saveAsJPG}>Télécharger</button>
       }
       <Canvas ref={canvasRef} />
     </Section>
