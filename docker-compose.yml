@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  web:
+    image: nginx
+    ports:
+      - 8080:80
+    volumes:
+      - ./dist:/usr/share/nginx/html
+  node:
+    image: node:12-alpine
+    user: "node"
+    working_dir: "/home/node/app"
+    environment:
+      - WATCHPACK_POLLING=true
+    volumes:
+      - ./:/home/node/app
+    command: "npm install"
