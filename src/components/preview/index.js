@@ -1,9 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import {Section} from './../layout';
 import renderPreview, {clearCanvas} from './canvas';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Unstable_Grid2';
+import Box from '@mui/material/Box';
 
 function debounce(func, ms) {
   let timeout;
@@ -37,11 +39,11 @@ function download(file, filename) {
   }
 }
 
-const Canvas = styled.canvas`
-  width: 100%;
-  height: auto;
-  border: 2px solid darkgrey;
-`;
+// const Canvas = styled.canvas`
+//   width: 100%;
+//   height: auto;
+//   border: 2px solid darkgrey;
+// `;
 
 export default function Preview({
   upperText,
@@ -74,12 +76,14 @@ export default function Preview({
   }
 
   return (
-    <Section>
-      <h2>{t('preview')}</h2>
+    <Grid xs={6}>
+      <Typography variant="h4" component="h2" gutterBottom>{t('preview')}</Typography>
       { img &&
-        <button type="button" onClick={saveAsJPG}>{t('downloadCta')}</button>
+        <Button variant="contained" onClick={saveAsJPG}>{t('downloadCta')}</Button>
       }
-      <Canvas ref={canvasRef} />
-    </Section>
+      <Box mt={2}>
+        <canvas className='preview-canvas' ref={canvasRef} />
+      </Box>
+    </Grid>
   )
 }

@@ -40,7 +40,9 @@ i18n
           formTitle: 'Informations du QRcode',
           preview: 'Prévisualisation',
           downloadCta: 'Télécharger',
-          upperTextLabel: 'Texte en haut du QRcode',
+          upperText: {
+            label: 'Texte en haut du QRcode',
+          },
           image: {
             label: 'Image du QRcode',
             deleteCta: 'Supprimer', 
