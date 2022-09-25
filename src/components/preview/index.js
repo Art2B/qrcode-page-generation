@@ -78,12 +78,17 @@ export default function Preview({
   return (
     <Grid xs={6}>
       <Typography variant="h4" component="h2" gutterBottom>{t('preview')}</Typography>
-      { img &&
-        <Button variant="contained" onClick={saveAsJPG}>{t('downloadCta')}</Button>
+      { !img &&
+        <Typography variant="body1">{t('previewHelp')}</Typography>  
       }
-      <Box mt={2}>
-        <canvas className='preview-canvas' ref={canvasRef} />
-      </Box>
+      { img &&
+        <React.Fragment>
+          <Button variant="contained" onClick={saveAsJPG}>{t('downloadCta')}</Button>
+          <Box mt={2}>
+            <canvas className='preview-canvas' ref={canvasRef} />
+          </Box>
+        </React.Fragment>
+      }
     </Grid>
   )
 }

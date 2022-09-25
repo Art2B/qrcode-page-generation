@@ -6,5 +6,6 @@
 .preview-canvas {
   width: 100%;
   height: auto;
-  border: 2px solid lightsteelblue;
+  border: 2px solid rgb(30, 73, 118);
+  border-radius: 8px;
 }

@@ -9,6 +9,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Box from '@mui/material/Box';
 
 import Preview from './components/preview';
+import ImageInput from './components/imageInput';
 
 export default function App() {
   const [upperText, setUpperText] = React.useState('');
@@ -17,16 +18,6 @@ export default function App() {
   const [nbPerLine, setNbPerLine] = React.useState(5);
   const [nbLines, setNbLines] = React.useState(5);
   const { t } = useTranslation();
-
-  const handleFile = file => {
-    if (!file) return;
-
-    var reader = new FileReader();
-    reader.onload = function(readEvent) {
-      setLoadedImg(readEvent.target.result);
-    };
-    reader.readAsDataURL(file);
-  }
 
   return (
     <Box px={4}>
@@ -37,11 +28,12 @@ export default function App() {
         <Grid xs={6}>
           <Typography variant="h4" component="h2" gutterBottom>{t('formTitle')}</Typography>
           <form>
-            <Box mt={1} mb={2}>
+            <Box mt={1} mb={2} >
               <TextField
                 id="upper-text"
                 label={t('upperText.label')}
                 multiline
+                fullWidth
                 value={upperText}
                 onChange={e => setUpperText(e.target.value)}
               />
@@ -49,14 +41,13 @@ export default function App() {
               <textarea name="upper-text" value={upperText} onChange={e => setUpperText(e.target.value)}></textarea> */}
             </Box>
             <Box mt={1} mb={3}>
-              <label htmlFor="qrcode-img">{t('image.label')}</label>
-              <input type="file" name="qrcode-img" accept="image/png, image/jpeg" onChange={e => handleFile(e.target.files[0])} />
+              {!loadedImg && <ImageInput onChange={setLoadedImg} />}
               { loadedImg && (
                 <React.Fragment>
                   <Box
                     sx={{
-                      width: 300,
-                      height: 300,
+                      width: 200,
+                      height: 'auto',
                     }}
                     mt={1}
                   >
@@ -73,11 +64,12 @@ export default function App() {
                 id="lower-text"
                 label={t('lowerText.label')}
                 multiline
+                fullWidth
                 value={lowerText}
                 onChange={e => setLowerText(e.target.value)}
               />
             </Box>
-            <Grid xs={12} md={6}>
+            <Grid xs={12} md={8}>
               <Typography variant="body1">
                 <Trans i18nKey="nbPerLine.label" nbPerLine={nbPerLine}>
                   Nombre par ligne: {{nbPerLine}}
@@ -94,7 +86,7 @@ export default function App() {
                 valueLabelDisplay="auto"
               />
             </Grid>
-            <Grid xs={12} md={6}>
+            <Grid xs={12} md={8}>
               <Typography variant="body1">
                 <Trans i18nKey="nbLines.label" nbLines={nbLines}>
                   Nombre de lignes: {{nbLines}}
